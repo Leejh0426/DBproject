@@ -1,6 +1,7 @@
 package DB.DBproject.repository;
 
 import DB.DBproject.domain.Cart;
+import DB.DBproject.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -22,19 +23,19 @@ public class JdbcCartRepository implements CartRepository{
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-/*
+
     @Override
-    public Cart save(Cart cart) {
+    public String save(int id) {
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
         jdbcInsert.withTableName("cart").usingGeneratedKeyColumns("cart_id");
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("cart_id", cart.getCart_id());
+        parameters.put("product_id", id);
         Number key = jdbcInsert.executeAndReturnKey(new
                 MapSqlParameterSource(parameters));
-        cart.setCart_id(key.intValue());
-        return cart;
-    }
 
+        return "저장완료";
+    }
+/*
     @Override
     public Optional<Cart> findById(Long id) {
         List<Cart> result = jdbcTemplate.query("select * from cart where cart_id = ?", cartRowMapper(), id);
@@ -44,18 +45,23 @@ public class JdbcCartRepository implements CartRepository{
 */
 
 
+    //장바구니에 담긴 product의 정보를 꺼내온다.
     @Override
-    public List<Cart> findAll() {
-        return jdbcTemplate.query("select * from cart", cartRowMapper());
+    public List<Product> findproductAll() {
+        return jdbcTemplate.query("select p.product_id, p.name, p.price, p.image from cart c, product p where c.product_id = p.product_id ", productRowMapper());
     }
 
 
-    private RowMapper<Cart> cartRowMapper() {
+
+
+    private RowMapper<Product> productRowMapper() {
         return (rs, rowNum) -> {
-            Cart cart = new Cart();
-            cart.setCart_id(rs.getInt("cart_id"));
-            cart.setProduct_id(rs.getInt("product_id"));
-            return cart;
+            Product product = new Product();
+            product.setProduct_id(rs.getInt("product_id"));
+            product.setName(rs.getString("name"));
+            product.setPrice(rs.getInt("price"));
+            product.setImage(rs.getString("Image"));
+            return product;
         };
     }
 }

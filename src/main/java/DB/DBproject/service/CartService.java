@@ -1,6 +1,7 @@
 package DB.DBproject.service;
 
 import DB.DBproject.domain.Cart;
+import DB.DBproject.domain.Product;
 import DB.DBproject.repository.CartRepository;
 
 import java.util.List;
@@ -19,9 +20,12 @@ public class CartService {
     }
 
  */
+    public String save(int id){
+        return cartRepository.save(id);
+    }
 
-    public List<Cart> findCarts(){
-        return cartRepository.findAll();
+    public List<Product> findproductAll(){
+        return cartRepository.findproductAll();
     }
 
 

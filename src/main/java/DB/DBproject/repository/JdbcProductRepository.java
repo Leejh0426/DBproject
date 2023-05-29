@@ -23,6 +23,8 @@ public class JdbcProductRepository implements ProductRepository{
     }
 
 
+
+
     private RowMapper<Product> productRowMapper() {
         return (rs, rowNum) -> {
             Product product = new Product();
