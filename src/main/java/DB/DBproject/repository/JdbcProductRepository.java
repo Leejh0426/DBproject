@@ -19,7 +19,7 @@ public class JdbcProductRepository implements ProductRepository{
 
     @Override
     public List<Product> findAll() {
-        return jdbcTemplate.query("select * from Product", productRowMapper());
+        return jdbcTemplate.query("select * from product", productRowMapper());
     }
 
 
