@@ -29,6 +29,7 @@ public class JdbcCartRepository implements CartRepository{
     public String save(int user_id, int product_id) {
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
         jdbcInsert.withTableName("cart").usingGeneratedKeyColumns("cart_id");
+
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("product_id", product_id);
         parameters.put("user_id", user_id);
