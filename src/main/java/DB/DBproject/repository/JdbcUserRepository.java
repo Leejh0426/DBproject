@@ -58,7 +58,18 @@ public class JdbcUserRepository {
             return "성공";
         }
     }
+//작업중
+    public void updateForm(User user){
+        this.jdbcTemplate.update(
+                "update user set name = ? ,password =?, sex =? , phone_number=?, address=?  where user_id = ?",
+                user.getName(), user.getPassword(),user.getSex(),user.getPhone_number(),user.getAddress(),user.getUser_id());
+    }
 
+    public User findId(int id){
+        return jdbcTemplate.queryForObject("select * from user where user_id=?", userRowMapper(), id);
+    }
+
+    //
     private RowMapper<User> userRowMapper() {
         return (rs, rowNum) -> {
             User user = new User();

@@ -30,6 +30,11 @@ public class UserController {
         return userService.findNamePassword(name,password);
     }
 
+    //유저 상세정보에서 업데이트 API
+    @PutMapping("/user/{user}")
+    public User updateForm(@PathVariable User user){
+        return userService.updateForm(user);
+    }
 
 
 

@@ -20,4 +20,9 @@ public class UserService {
     public User findNamePassword(String name, String password){
         return jdbcUserRepository.findNamePassword(name,password);
     }
+
+    public User updateForm(User user){
+        jdbcUserRepository.updateForm(user);
+        return jdbcUserRepository.findId(user.getUser_id());
+    }
 }
