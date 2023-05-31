@@ -24,8 +24,8 @@ public class CartService {
         return cartRepository.save(user_id, product_id);
     }
 
-    public List<Product> findproductAll(){
-        return cartRepository.findproductAll();
+    public List<Product> findproductAll(int user_id){
+        return cartRepository.findproductAll(user_id);
     }
 
 

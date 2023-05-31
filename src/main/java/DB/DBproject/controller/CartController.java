@@ -21,9 +21,10 @@ public class CartController {
     }
 
 
-    @GetMapping("/carts")
-    public List<Product> list(){
-        List<Product> carts = cartService.findproductAll();
+    //장바구니 확인 API
+    @GetMapping("/carts/{user_id}")
+    public List<Product> list(@PathVariable  int user_id){
+        List<Product> carts = cartService.findproductAll(user_id);
         return carts;
     }
 

@@ -10,7 +10,7 @@ public interface CartRepository {
 
     String save(int user_id, int product_id);
     //Optional<Cart> findById(Long id);
-    List<Product> findproductAll();
+    public List<Product> findproductAll(int user_id);
  //   Optional<Cart> saveById(int id);
 
     public void delete(int user_id, int product_id);

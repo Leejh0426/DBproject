@@ -49,8 +49,8 @@ public class JdbcCartRepository implements CartRepository{
 
     //장바구니에 담긴 product의 정보를 꺼내온다.
     @Override
-    public List<Product> findproductAll() {
-        return jdbcTemplate.query("select p.product_id, p.name, p.price, p.image from cart c, product p where c.product_id = p.product_id ", productRowMapper());
+    public List<Product> findproductAll(int user_id) {
+        return jdbcTemplate.query("select p.product_id, p.name, p.price, p.image from cart c, product p where c.product_id = p.product_id and c.user_id = ? ", productRowMapper(), user_id);
     }
 
     //product_id를 넘겨받고 그거랑 일치하는 자료를 삭제해준다.
