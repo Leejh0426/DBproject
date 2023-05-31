@@ -8,9 +8,10 @@ import java.util.Optional;
 
 public interface CartRepository {
 
-    String save(int id);
+    String save(int user_id, int product_id);
     //Optional<Cart> findById(Long id);
     List<Product> findproductAll();
  //   Optional<Cart> saveById(int id);
 
+    public void delete(int user_id, int product_id);
 }

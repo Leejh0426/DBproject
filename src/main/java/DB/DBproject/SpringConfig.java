@@ -1,11 +1,9 @@
 package DB.DBproject;
 
-import DB.DBproject.repository.CartRepository;
-import DB.DBproject.repository.JdbcCartRepository;
-import DB.DBproject.repository.JdbcProductRepository;
-import DB.DBproject.repository.ProductRepository;
+import DB.DBproject.repository.*;
 import DB.DBproject.service.CartService;
 import DB.DBproject.service.ProductService;
+import DB.DBproject.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -30,6 +28,9 @@ public class SpringConfig {
     @Bean
     public ProductService productService() {return new ProductService(productRepository()); }
 
+    @Bean
+    public UserService userService() { return new UserService(userRepository()); }
+
 
     @Bean
     public CartRepository cartRepository(){
@@ -42,6 +43,13 @@ public class SpringConfig {
     public ProductRepository productRepository(){
         return new JdbcProductRepository(dataSource);
     }
+
+    @Bean
+    public JdbcUserRepository userRepository(){
+        return new JdbcUserRepository(dataSource);
+    }
+
+
 
 
 }

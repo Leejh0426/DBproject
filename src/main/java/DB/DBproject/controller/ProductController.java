@@ -24,7 +24,7 @@ public class ProductController {
 
 
 
-
+    //모든 product 열을 들고 와주는 API(첫페이지에사용)
     @GetMapping("/products")
     public List<Product> list(){
         List<Product> products = productService.findProducts();

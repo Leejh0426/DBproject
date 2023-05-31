@@ -5,10 +5,7 @@ import DB.DBproject.domain.Product;
 import DB.DBproject.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,12 +27,21 @@ public class CartController {
         return carts;
     }
 
-    @PostMapping("/carts")
-    public String add(@RequestParam int id){
-        return cartService.save(id);
+
+    // 장바구니 담기할때 쓰이는 API
+    @PostMapping("/carts/{user_id}/{product_id}")
+    public String add(@PathVariable int user_id, @PathVariable int product_id){
+        return cartService.save(user_id,product_id);
     }
 
 
+
+    // 장바구니에서 ID값을 이용해서 삭제하는 API
+    @DeleteMapping("/carts/{user_id}/{product_id}")
+    public String delete(@PathVariable int user_id, @PathVariable int product_id){
+        cartService.deleteproduct_id(user_id,product_id);
+        return "삭제완료";
+    }
 
 
 

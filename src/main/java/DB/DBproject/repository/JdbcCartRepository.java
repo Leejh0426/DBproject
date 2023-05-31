@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+
 public class JdbcCartRepository implements CartRepository{
 
     private final JdbcTemplate jdbcTemplate;
@@ -25,11 +26,12 @@ public class JdbcCartRepository implements CartRepository{
 
 
     @Override
-    public String save(int id) {
+    public String save(int user_id, int product_id) {
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
         jdbcInsert.withTableName("cart").usingGeneratedKeyColumns("cart_id");
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("product_id", id);
+        parameters.put("product_id", product_id);
+        parameters.put("user_id", user_id);
         Number key = jdbcInsert.executeAndReturnKey(new
                 MapSqlParameterSource(parameters));
 
@@ -49,6 +51,15 @@ public class JdbcCartRepository implements CartRepository{
     @Override
     public List<Product> findproductAll() {
         return jdbcTemplate.query("select p.product_id, p.name, p.price, p.image from cart c, product p where c.product_id = p.product_id ", productRowMapper());
+    }
+
+    //product_id를 넘겨받고 그거랑 일치하는 자료를 삭제해준다.
+
+    @Override
+    public void delete(int user_id, int product_id){
+        this.jdbcTemplate.update(
+                "delete from cart where user_id = ? and product_id = ?", Integer.valueOf(user_id),Integer.valueOf(product_id));
+
     }
 
 

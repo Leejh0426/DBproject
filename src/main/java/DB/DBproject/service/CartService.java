@@ -20,13 +20,17 @@ public class CartService {
     }
 
  */
-    public String save(int id){
-        return cartRepository.save(id);
+    public String save(int user_id, int product_id){
+        return cartRepository.save(user_id, product_id);
     }
 
     public List<Product> findproductAll(){
         return cartRepository.findproductAll();
     }
 
+
+    public void deleteproduct_id(int user_id, int product_id){
+        cartRepository.delete(user_id, product_id);
+    }
 
 }
