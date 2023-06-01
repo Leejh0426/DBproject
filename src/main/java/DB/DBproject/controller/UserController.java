@@ -31,8 +31,8 @@ public class UserController {
     }
 
     //유저 상세정보에서 업데이트 API
-    @PutMapping("/user/{user}")
-    public User updateForm(@PathVariable User user){
+    @PutMapping("/user")
+    public User updateForm(@RequestBody User user){
         return userService.updateForm(user);
     }
 
